@@ -1,11 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script type="module" src="timetable.js"></script>
+
 </head>
+
 <body>
-    
+    <header>
+        <h1>Svenssons Hantverk AB</h1>
+    </header>
+
+    <nav>
+        <div class="navCheckBoxes">
+            <h3>Hantverkare:</h3>
+            <label>
+                <input type="checkbox" name="chk1">
+                Snickare.
+            </label>
+            <label>
+                <input type="checkbox" name="chk2">
+                Målare
+            </label>
+            <label>
+                <input type="checkbox" name="chk2">
+                Elektriker
+            </label>
+            <label>
+                <input type="checkbox" name="chk2">
+                Murare
+            </label>
+            <label>
+                <input type="checkbox" name="chk2">
+                Rörmokare
+            </label>
+        </div>
+
+        <div class="navSort">
+            <h3>Sortera på:</h3>
+            <div class="item">
+                <div class="item-menu">
+                    <button class="drop-button">
+                        Kategori
+                        <img class="drop" src="./assets/pictures/arrowdown.jpg" alt="dropdown arrow">
+                    </button>
+                </div>
+                <div class="item-content">
+                    <div class="tag">Nöt</div>
+                    <div class="tag">Fisk</div>
+                    <div class="tag">Lamm</div>
+                    <div class="tag">Fläsk</div>
+                    <div class="tag">Grönsaker</div>
+                    <div class="tag">Fågel</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navDate">
+            <h3>Välj Tidsperiod:</h3>
+        </div>
+    </nav>
+
+    <main>
+
+        <div class="timetable">
+            
+        </div>
+
+
+    </main>
+
+    <footer>
+
+    </footer>
+
 </body>
+
 </html>

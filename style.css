@@ -4,12 +4,42 @@
     box-sizing: border-box;
 }
 
+:root {
+    --color-1: #D8E3FF;/*Header*/
+    --color-2: #44B1F9;/*Blå  B 50%*/
+    --color-3: #00E910;/*Grön  Bokningsbar */
+    --color-4: #FFDA0C;/*Gul PB 100%*/
+    --color-5: #FFA20C;/*Orange B 100%*/
+    --color-6: #DCD9D9;/*Grå*/
+    --color-7: #7FFFD0;/*Cyan PB 50%*/
+    --color-8: #8B1313;/*Röd Frånvarande*/
+    --color-9: #2D3134;/*Textfärg */
+    --color-10: #8C8C8C;/*Scrollbar  och Rutnät*/
+    --color-11: #0047FF;/*blå färg kalender*/
+}
+
 body, h1, h2, h3, h4, p,
 figure, blockquote, dl, dd {
+    margin: 0;
     margin-block-end: 0;
 }
 
 body {
     min-height: 100vh;
     line-height: 1.5;
+    font-family: 'Hanken Grotesk', sans-serif;
 }
+
+header {
+    background-color:lightsteelblue;
+}
+
+nav{
+    display: flex;
+    justify-content: space-around;
+}
+
+h1 {
+    padding: 0.3em 0.3em 0 0.3em;
+}
+
