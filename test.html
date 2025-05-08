@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Stor Kalender för Datumintervall</title>
+  <style>
+    .calendar-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border: 1px solid #ccc;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+    .calendar-popup.active {
+      display: block;
+    }
+    .calendar-popup input[type="date"] {
+      display: block;
+      font-size: 16px;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>Välj datumintervall</h2>
+
+  <button id="openPicker">Öppna kalender</button>
+
+  <!-- Kalender Popup -->
+  <div id="calendarPopup" class="calendar-popup">
+    <h3>Välj datumintervall</h3>
+    <div>
+      <label for="startDate">Startdatum:</label>
+      <input type="date" id="startDate" name="start">
+    </div>
+    <div>
+      <label for="endDate">Slutdatum:</label>
+      <input type="date" id="endDate" name="end">
+    </div>
+    <button id="closePopup">Stäng</button>
+  </div>
+
+  
+  
+  <script>
+    const openButton = document.getElementById('openPicker');
+    const closeButton = document.getElementById('closePopup');
+    const popup = document.getElementById('calendarPopup');
+
+    // Öppna kalendern när knappen trycks
+    openButton.addEventListener('click', () => {
+      popup.classList.add('active');
+    });
+
+    // Stäng popupen
+    closeButton.addEventListener('click', () => {
+      popup.classList.remove('active');
+    });
+
+    // Stäng popupen om man klickar utanför
+    window.addEventListener('click', (event) => {
+      if (!popup.contains(event.target) && event.target !== openButton) {
+        popup.classList.remove('active');
+      }
+    });
+
+    
+  </script>
+</body>
+</html>
