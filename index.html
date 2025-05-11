@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://unpkg.com/vue@3.5.13"
+        integrity="sha384-G++pO/TtP6SeNEBuO/CYuppmlcEhA0Rj9IcY5feVJXhyYraEA8CKVZV38iDXLTyJ"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="person.css">
     <script defer src="script.js"></script>
-    <script defer src="bookings.js"></script>
-    <script type="module" src="timetable.js"></script>
+    <!-- <script defer src="bookings.js"></script> -->
+    <!-- <script type="module" src="timetable.js"></script> -->
+    <script type="module" src="person.js"></script>
 
 </head>
 
@@ -75,38 +80,63 @@
         <div class="navSort">
             <h3>Sortera på:</h3>
             <select name="Sorter">
-                <option value="alphabetical" selected>Bokstavsordning</option>
-                <option value="availability">Tillgänglighet</option>
+                <option value="availability" selected>Tillgänglighet</option>
+                <option value="alphabetical">Bokstavsordning</option>
             </select>
         </div>
 
         <div class="navDate">
-            <label for="start">Välj Tidsperiod:</label>
-            <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31" />
-
             <form>
-                <label for="start">Startdatum:</label>
-                <input type="date" id="start" name="start">
-
-                <label for="end">Slutdatum:</label>
-                <input type="date" id="end" name="end">
-
-                <button type="submit">Skicka</button>
+                <div>
+                    <label for="start">Startdatum:</label>
+                    <input type="date" id="start" name="start">
+                </div>
+                <p> - </p>
+                <div>
+                    <label for="end">Slutdatum:</label>
+                    <input type="date" id="end" name="end">
+                </div>
             </form>
         </div>
     </nav>
 
     <main>
 
-        <div class="timetable">
+        <div class="timetable" id="app">
+            <div class="dateContainer">
+
+            </div>
+
+            <div class="personContainer">
+                <person></person>
+            </div>
 
         </div>
 
 
-    </main>
+    </main><br>
 
     <footer>
-
+        <div class="colorInformation">
+            <div id="Bokad100%">
+                <p>Bokad100%(B100)</p>
+            </div>
+            <div id="Bokad50%">
+                <p>Bokad50%(B50)</p>
+            </div>
+            <div id="prel.bokad100%">
+                <p>prel.bokad100%(PB100)</p>
+            </div>
+            <div id="prel.bokad50%">
+                <p>prel.bokad50%(PB50)</p>
+            </div>
+            <div id="Bokningsbar">
+                <p>Bokningsbar(FRI)</p>
+            </div>
+            <div id="Franvarand">
+                <p>Frånvarande(F)</p>
+            </div>
+        </div>
     </footer>
 
 </body>

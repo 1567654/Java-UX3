@@ -44,16 +44,27 @@ h1 {
 }
 
 .navCheckBoxes{
-    lable{
-        /* padding-bottom: 55px; */
-    }
-
     svg{
         padding-top: 15px;
         width: 25px;
         height: 35px;
         justify-content: baseline;
     }
+
+    label{
+        /* padding-bottom: 15px; */
+    }
 }
 
+.navDate{
+    form{
+        display: flex;
+    }
+}
+
+.colorInformation{
+    display: flex;
+    flex-direction: row;
+    column-gap: 30px;
+}
 
