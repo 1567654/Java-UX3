@@ -1,34 +1,35 @@
-
-
-.persons{
+.persons {
+    height: 600px;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    overflow-x: auto;
-    overflow-y: scroll;
+
+    overflow: auto auto;
 
     /* background-color: hotpink; */
 }
 
-.person,.date{
-    display:flexbox;
+.person,
+.date {
+    display: flexbox;
     flex-wrap: nowrap;
     width: 180px;
     border: solid 2px#8C8C8C;
     flex-direction: column;
-    p{
+
+    p {
         display: flexbox;
         /* flex-wrap: ; */
     }
 }
 
-.bookingTimes{
+.bookingTimes {
     /* width: 180px; */
     border: solid 1px #8C8C8C;
     display: flex;
     flex-direction: column;
 
-    p{
+    p {
         display: flex;
         align-items: center;
         align-content: center;

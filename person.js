@@ -101,7 +101,7 @@ const person = {
 
             // }
 
-            return ["adjlajd", "kjsbksb", "skhbckscb"]
+            return ["adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb","adjlajd", "kjsbksb", "skhbckscb"]
         }
     },
 
@@ -116,7 +116,11 @@ const person = {
         </div>
 
         <div class="dates">
-            <p class="date">empty</p>
+            <div class="person">
+                <p style="visibility: hidden;">empty</p>
+                <p style="visibility: hidden;">empty</p>
+            </div>
+
             <p class="date" v-for="date of getDates()">{{date}}</p>
         </div>
 
