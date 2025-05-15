@@ -14,7 +14,7 @@
     display:flexbox;
     flex-wrap: nowrap;
     width: 180px;
-    border: solid 2px#8C8C8C;
+    /* border: solid 1px#8C8C8C; */
     flex-direction: column;
     p{
         display: flexbox;
@@ -22,9 +22,13 @@
     }
 }
 
+.date {
+    display: flex;
+    flex-direction: row;
+}
+
 .bookingTimes{
     /* width: 180px; */
-    border: solid 1px #8C8C8C;
     display: flex;
     flex-direction: column;
 
@@ -34,5 +38,6 @@
         align-content: center;
         justify-items: center;
         justify-content: center;
+        /* border: 1px solid #8C8C8C; */
     }
 }

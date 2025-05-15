@@ -33,7 +33,9 @@ const person = {
 
         async CreateView() {
             const data = await this.getALLBookings();
-            console.log(data[0]);
+            for (const person of data) {
+                console.log(person);
+            }
             if (Array.isArray(data)) {
                 this.infos = data;
             }
@@ -89,21 +91,46 @@ const person = {
             }
         },
 
-        getDates() {
-            const from = document.getElementById('start');
-            const to = document.getElementById('end');
 
-            const date = to.value;
+        // Takes a list of employees and returns a list of dates ranging from the lowest date to highest
+        getDates(personInfo) {
 
-            console.log(to);
-            console.log(date);
-            // for(const date = to.value; ){
+            let startDate = 0
+            let endDate = 0
+            let dateList = []
 
-            // }
+            let startList = []
 
-            return ["adjlajd", "kjsbksb", "skhbckscb"]
-        }
+            for (const person of personInfo) {
+                for (const booking of person.bookings) {
+                    startDate = Date.parse(booking.to)
+                    if (startDate >= Date.parse(booking.from)) {
+                        startList.push(new Date(Date.parse(booking.from)))
+                        startDate = startList[0]
+                    }
+                    if (endDate <= Date.parse(booking.to)) {
+                        endDate = new Date(Date.parse(booking.to))
+                    }
+                }
+            }
+
+            let date = new Date(startDate)
+
+            while (date <= endDate) {
+                dateList.push(date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate())
+                date.setDate(date.getDate() + 1)
+            }
+            return dateList
+        },
+        interval(to, from) {
+            to = new Date(to)
+            from = new Date(from)
+            let dateLength = new Date(to.getTime() - from.getTime()).getDate()
+            return dateLength
+        },
     },
+
+    
 
     mounted() {
         this.CreateView();
@@ -111,14 +138,18 @@ const person = {
     template: `
       <div class=persons>
         
-        <div class="weeks">
+        <div>
+            <div class="weeks">
+                <p>v10</p>
+                <br>
+            </div>
+    
+            <div class="dates" v-for="dat of getDates(infos)">
+                    <p class="date">{{dat}}</p>
+            </div>
+            
+        </div>
         
-        </div>
-
-        <div class="dates">
-            <p class="date">empty</p>
-            <p class="date" v-for="date of getDates()">{{date}}</p>
-        </div>
 
         <div v-if="infos.length" v-for="info of infos">
             <div class="person">
@@ -127,7 +158,9 @@ const person = {
             </div>
 
             <div class="bookingTimes" v-for="booking of info.bookings">
-                <p :style="{backgroundColor: getColorForSomeBox(bookingBlock(booking))}">{{bookingBlock(booking)}}</p>
+                <div v-for="n of interval(booking.to, booking.from)">
+                    <p :style="{backgroundColor: getColorForSomeBox(bookingBlock(booking))}">{{bookingBlock(booking)}}</p>
+                </div>
             </div>
         </div>
         
