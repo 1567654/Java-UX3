@@ -1,3 +1,4 @@
+import {compareAsc} from 'date-fns'
 const person = {
     data() {
         return {
@@ -33,9 +34,9 @@ const person = {
 
         async CreateView() {
             const data = await this.getALLBookings();
-            for (const person of data) {
-                console.log(person);
-            }
+            // for (const person of data) {
+            //     console.log(person);
+            // }
             if (Array.isArray(data)) {
                 this.infos = data;
             }
@@ -95,31 +96,22 @@ const person = {
         // Takes a list of employees and returns a list of dates ranging from the lowest date to highest
         getDates(personInfo) {
 
-            let startDate = 0
-            let endDate = 0
             let dateList = []
 
-            let startList = []
+            // let startList = []
+            // startList.push(new Date(Date.parse(booking.from)))
+
 
             for (const person of personInfo) {
                 for (const booking of person.bookings) {
-                    startDate = Date.parse(booking.to)
-                    if (startDate >= Date.parse(booking.from)) {
-                        startList.push(new Date(Date.parse(booking.from)))
-                        startDate = startList[0]
-                    }
-                    if (endDate <= Date.parse(booking.to)) {
-                        endDate = new Date(Date.parse(booking.to))
-                    }
+                    dateList.push(new Date(booking.from.getFullYear(), booking.from.getMonth(), booking.from.getDate()))
+                    dateList.push(new Date(booking.to.getFullYear(), booking.to.getMonth(), booking.to.getDate()))
                 }
             }
 
-            let date = new Date(startDate)
+            dateList.sort(compareAsc)
+            console.log(dateList)
 
-            while (date <= endDate) {
-                dateList.push(date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate())
-                date.setDate(date.getDate() + 1)
-            }
             return dateList
         },
         interval(to, from) {
