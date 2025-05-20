@@ -1,3 +1,4 @@
+import {compareAsc} from 'date-fns'
 const person = {
     data() {
         return {
@@ -33,7 +34,9 @@ const person = {
 
         async CreateView() {
             const data = await this.getALLBookings();
-            console.log(data[0]);
+            // for (const person of data) {
+            //     console.log(person);
+            // }
             if (Array.isArray(data)) {
                 this.infos = data;
             }
@@ -89,21 +92,37 @@ const person = {
             }
         },
 
-        getDates() {
-            const from = document.getElementById('start');
-            const to = document.getElementById('end');
 
-            const date = to.value;
+        // Takes a list of employees and returns a list of dates ranging from the lowest date to highest
+        getDates(personInfo) {
 
-            console.log(to);
-            console.log(date);
-            // for(const date = to.value; ){
+            let dateList = []
 
-            // }
+            // let startList = []
+            // startList.push(new Date(Date.parse(booking.from)))
 
-            return ["adjlajd", "kjsbksb", "skhbckscb"]
-        }
+
+            for (const person of personInfo) {
+                for (const booking of person.bookings) {
+                    dateList.push(new Date(booking.from.getFullYear(), booking.from.getMonth(), booking.from.getDate()))
+                    dateList.push(new Date(booking.to.getFullYear(), booking.to.getMonth(), booking.to.getDate()))
+                }
+            }
+
+            dateList.sort(compareAsc)
+            console.log(dateList)
+
+            return dateList
+        },
+        interval(to, from) {
+            to = new Date(to)
+            from = new Date(from)
+            let dateLength = new Date(to.getTime() - from.getTime()).getDate()
+            return dateLength
+        },
     },
+
+    
 
     mounted() {
         this.CreateView();
@@ -111,14 +130,18 @@ const person = {
     template: `
       <div class=persons>
         
-        <div class="weeks">
+        <div>
+            <div class="weeks">
+                <p>v10</p>
+                <br>
+            </div>
+    
+            <div class="dates" v-for="dat of getDates(infos)">
+                    <p class="date">{{dat}}</p>
+            </div>
+            
+        </div>
         
-        </div>
-
-        <div class="dates">
-            <p class="date">empty</p>
-            <p class="date" v-for="date of getDates()">{{date}}</p>
-        </div>
 
         <div v-if="infos.length" v-for="info of infos">
             <div class="person">
@@ -127,7 +150,9 @@ const person = {
             </div>
 
             <div class="bookingTimes" v-for="booking of info.bookings">
-                <p :style="{backgroundColor: getColorForSomeBox(bookingBlock(booking))}">{{bookingBlock(booking)}}</p>
+                <div v-for="n of interval(booking.to, booking.from)">
+                    <p :style="{backgroundColor: getColorForSomeBox(bookingBlock(booking))}">{{bookingBlock(booking)}}</p>
+                </div>
             </div>
         </div>
         
