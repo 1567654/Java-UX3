@@ -3,10 +3,11 @@ const person = {
     data() {
         return {
             infos: [],
-            newprofession: ""
+            newprofession: "",
         };
     },
     methods: {
+        //get a json-objekt containing all bookings from the URL:"https://yrgo-web-services.netlify.app/bookings" 
         async getALLBookings() {
             const URL = "https://yrgo-web-services.netlify.app/bookings";
 
@@ -31,7 +32,8 @@ const person = {
                 return [];
             }
         },
-
+        // Prints all data retrieved from getAllBookings() to the console. 
+        // If the returned data is a list, the member variable infos is assigned that value.
         async CreateView() {
             const data = await this.getALLBookings();
             for (const person of data) {
@@ -46,6 +48,7 @@ const person = {
             return professions.join("/");
         },
 
+        //"Used to set the text for each employee, based on the bookings parameter."
         bookingBlock(booking) {
             const status = booking.status;
             const percentage = booking.percentage;
@@ -75,6 +78,7 @@ const person = {
             return text;
         },
 
+        //Sets a specific color. Used in conjunction with the bookingBlock method.
         getColorForSomeBox(text) {
             switch (text) {
                 case "B 50":
@@ -92,7 +96,6 @@ const person = {
             }
         },
 
-
         // Takes a list of employees and returns a list of dates ranging from the lowest date to highest
         getDates(personInfo) {
 
@@ -108,10 +111,16 @@ const person = {
                 }
             }
 
+            // if(start !== "" && end !== "") {
+            //     startDate = start
+            //     endDate = end
+            // } else {
+            // }
             dateList.sort(compareAsc)
             startDate = dateList[0]
             dateList.sort(compareDesc)
             endDate = dateList[0]
+            
 
             let date = new Date(startDate)
 
@@ -122,10 +131,12 @@ const person = {
 
             return range
         },
-        intervals(bookings) {
+
+        
+        intervals(bookings, range) {
             let bookingLength = {}
             let bookingLengths = []
-            let prevTo = bookings[0].from //should be 05-19
+            let prevTo = range[0]
             let prevFrom
             let prevActivity
             let prevPercentage
@@ -278,7 +289,7 @@ const person = {
                 <p>{{professionsFormatter(info.professions)}}</p>
             </div>
 
-            <div class="bookingTimes" v-for="booking of intervals(info.bookings)">
+            <div class="bookingTimes" v-for="booking of intervals(info.bookings, infos)">
                 <div v-for="n in booking.length">
                     <p :style="{backgroundColor: getColorForSomeBox(bookingBlock(booking))}">{{bookingBlock(booking)}}</p>
                 </div>

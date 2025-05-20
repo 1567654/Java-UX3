@@ -62,9 +62,48 @@ h1 {
     }
 }
 
-.colorInformation{
+.colorInformation {
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     column-gap: 30px;
+    justify-content: center;
+
+    #Bokad100, #Bokad50, #prelBokad100, #prelBokad50, #bokningsbar, #franvarand {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        column-gap: 10px;
+    }
+
+    #B100, #B50, #PB100, #PB50, #FRI, #F{
+        width: 25px;
+        height: 25px;
+        border: solid 2px var(--color-10);
+    }
+
+    #B100 {
+        background-color: var(--color-5);
+    }
+
+    #B50 {
+        background-color: var(--color-2);
+    }
+
+    #PB100 {
+        background-color: var(--color-7);
+    }
+
+    #PB50 {
+        background-color: var(--color-4);
+    }
+
+    #FRI {
+        background-color: var(--color-3);
+    }
+
+    #F {
+        background-color: var(--color-8);
+    }
 }
 
