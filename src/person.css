@@ -15,7 +15,7 @@
 .person,.date{
     display:flexbox;
     flex-wrap: nowrap;
-    width: 150px;
+    width: 160px;
     flex-direction: column;
 
     border: solid 1px#8C8C8C;
