@@ -15,10 +15,10 @@
 .person,.date{
     display:flexbox;
     flex-wrap: nowrap;
-    width: 180px;
+    width: 150px;
     flex-direction: column;
 
-    border: solid 2px#8C8C8C;
+    border: solid 1px#8C8C8C;
 
     p{
         display: flexbox;
