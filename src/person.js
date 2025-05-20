@@ -1,5 +1,9 @@
 import { compareAsc, compareDesc, differenceInDays, getDayOfYear } from 'date-fns'
 const person = {
+    props: {
+        start: "", 
+        end: ""
+    },
     data() {
         return {
             infos: [],
@@ -26,6 +30,33 @@ const person = {
 
 
                 return await response.json();
+
+            } catch (error) {
+                console.error(error);
+                return [];
+            }
+        },
+        async getQueriedBookings(start, end) {
+            const URL = `https://yrgo-web-services.netlify.app/bookings?start=${start}&end=${end}`;
+
+            try {
+                let response = await fetch(URL);
+
+                if (!response.ok) {
+                    if (response.status >= 400 && response.status < 500) {
+                        console.error(`Klientproblem ${response.status}: ${response.statusText}`);
+                        throw new Error("The search was incorrect.\n Try something else");
+                    } else {
+                        console.error(`Serverproblem ${response.status}: ${response.statusText}`);
+                        throw new Error("The server is unavailable at the moment.");
+                    }
+                }
+
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    this.infos = data;
+                }
+                return await data;
 
             } catch (error) {
                 console.error(error);
@@ -111,16 +142,11 @@ const person = {
                 }
             }
 
-            // if(start !== "" && end !== "") {
-            //     startDate = start
-            //     endDate = end
-            // } else {
-            // }
             dateList.sort(compareAsc)
             startDate = dateList[0]
             dateList.sort(compareDesc)
             endDate = dateList[0]
-            
+
 
             let date = new Date(startDate)
 
@@ -132,11 +158,11 @@ const person = {
             return range
         },
 
-        
-        intervals(bookings, range) {
+
+        intervals(bookings, dates) {
             let bookingLength = {}
             let bookingLengths = []
-            let prevTo = range[0]
+            let prevTo = dates[0]
             let prevFrom
             let prevActivity
             let prevPercentage
@@ -253,7 +279,7 @@ const person = {
                 prevActivity = booking.activity
                 prevPercentage = booking.percentage
                 prevStatus = booking.status
-                if(init) {
+                if (init) {
                     max = prevTo
                 }
             }
@@ -272,7 +298,8 @@ const person = {
         
         <div>
             <div class="weeks">
-                <p>v10</p>
+                <button @click="getQueriedBookings(start, end)">Uppdatera</button>
+                <br>
                 <br>
             </div>
     
@@ -289,7 +316,7 @@ const person = {
                 <p>{{professionsFormatter(info.professions)}}</p>
             </div>
 
-            <div class="bookingTimes" v-for="booking of intervals(info.bookings, infos)">
+            <div class="bookingTimes" v-for="booking of intervals(info.bookings, getDates(infos))">
                 <div v-for="n in booking.length">
                     <p :style="{backgroundColor: getColorForSomeBox(bookingBlock(booking))}">{{bookingBlock(booking)}}</p>
                 </div>
@@ -304,8 +331,14 @@ const person = {
 const app = Vue.createApp({
     data() {
         return {
-            start: '1',
+            start: '',
             end: ''
+        }
+    },
+    methods: {
+        submit() {
+            console.log(start.value)
+            console.log(end.value)
         }
     }
 });
