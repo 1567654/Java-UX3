@@ -301,7 +301,14 @@ const person = {
     `
 };
 
-const app = Vue.createApp({});
+const app = Vue.createApp({
+    data() {
+        return {
+            start: '1',
+            end: ''
+        }
+    }
+});
 app.component("person", person);
 app.mount("#app");
 
